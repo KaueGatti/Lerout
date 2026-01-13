@@ -35,9 +35,14 @@
     -fx-background-color: -color-green;
 }
 
+#LMarmitasVendidas-relatorio {
+    -fx-background-color: -color-green;
+}
+
 #LResumoGeral-relatorio,
 #LPedidos-relatorio,
-#LPagamentos-relatorio {
+#LPagamentos-relatorio,
+#LMarmitasVendidas-relatorio {
     -fx-text-fill: -color-white;
     -fx-padding: 0 0 0 10;
     -fx-background-radius: 10 10 0 0;
@@ -45,7 +50,8 @@
 
 #PResumoGeral-relatorio,
 #PPedidos-relatorio,
-#PPagamentos-relatorio {
+#PPagamentos-relatorio,
+#LMarmitasVendidas-relatorio{
     -fx-background-color: rgba(0, 0, 0, 0.1);
     -fx-background-radius: 0 0 10 10;
 }

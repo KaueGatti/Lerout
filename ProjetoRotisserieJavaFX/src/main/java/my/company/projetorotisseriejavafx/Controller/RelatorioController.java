@@ -89,6 +89,9 @@ public class RelatorioController implements Initializable {
     private Pane PPagamentos;
 
     @FXML
+    private Pane PMarmitasVendidas;
+
+    @FXML
     private Pane PPedidos;
 
     @FXML

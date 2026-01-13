@@ -74,4 +74,33 @@ public class MarmitaVendidaDAO {
         }
         return lista;
     }
+
+    static public List<MarmitaVendida> listarPorData(Date data) throws SQLException {
+        String sql = "SELECT MV.*, M.nome AS nome_marmita, P.date_time AS data FROM Marmita_Vendida AS MV " +
+                "JOIN Marmita AS M ON M.id = MV.id_marmita " +
+                "JOIN Pedido AS P ON P.id = MV.id_pedido " +
+                "WHERE DATE(P.date_time) = DATE(?)";
+
+        List<MarmitaVendida> lista = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setDate(1, data);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    MarmitaVendida mv = new MarmitaVendida();
+                    mv.setId(rs.getInt("id"));
+                    mv.setIdMarmita(rs.getInt("id_marmita"));
+                    mv.setNome(rs.getString("nome_marmita"));
+                    mv.setDetalhes(rs.getString("detalhes"));
+                    mv.setSubtotal(rs.getDouble("subtotal"));
+                    mv.setObservacao(rs.getString("observacao"));
+                    lista.add(mv);
+                }
+            }
+        }
+        return lista;
+    }
 }
