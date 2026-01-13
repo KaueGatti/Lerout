@@ -24,20 +24,27 @@ public class Printer {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         dadosPedidos.put("data", LocalDate.now().format(dtf));
 
-        StringBuilder marmitasText = new StringBuilder();
+        StringBuilder marmitasSB = new StringBuilder();
 
         for (int i = 0; i < marmitas.size(); i++) {
-            marmitasText.append("[bold]");
-            marmitasText.append(marmitas.get(i).getNome()).append("\n");
-            marmitasText.append("[/bold]");
-            marmitasText.append(marmitas.get(i).getDetalhes()).append("\n");
-            marmitasText.append("Observacao: ");
-            marmitasText.append(marmitas.get(i).getObservacao() != null ? marmitas.get(i).getObservacao() : "");
+            marmitasSB.append("[bold]");
+            marmitasSB.append(marmitas.get(i).getNome()).append("\n");
+            marmitasSB.append("[/bold]");
+            marmitasSB.append(marmitas.get(i).getDetalhes()).append("\n");
+            marmitasSB.append("Observacao: ");
+            marmitasSB.append(marmitas.get(i).getObservacao() != null ? marmitas.get(i).getObservacao() : "");
 
             if (i != marmitas.size() - 1) {
-                marmitasText.append("\n\n");
+                marmitasSB.append("\n\n");
             }
         }
+
+        String marmitasText = marmitasSB.toString();
+        marmitasText = marmitasText.replace("Principais:", "[bold]Principais:[/bold]")
+                .replace("Misturas:", "[bold]\nMisturas:[/bold]")
+                .replace("Guarnicoes:", "[bold]\nGuarnicoes:[/bold]")
+                .replace("Saladas:", "[bold]\nSaladas:[/bold]")
+                .replace("Observacoes:", "[bold]\nObservacoes:[/bold]");
 
         StringBuilder produtosText = new StringBuilder();
 
@@ -46,7 +53,9 @@ public class Printer {
             produtosText.append("x").append(produtos.get(i).getQuantidade()).append("\n");
         }
 
-        dadosPedidos.put("marmitas", marmitasText.toString());
+        dadosPedidos.put("MARMITAS", marmitas.isEmpty() ? "" : "MARMITAS");
+        dadosPedidos.put("marmitas", marmitasText);
+        dadosPedidos.put("PRODUTOS", produtos.isEmpty() ? "" : "PRODUTOS");
         dadosPedidos.put("produtos", produtosText.toString());
         dadosPedidos.put("endereco", pedido.getEndereco() != null ? pedido.getEndereco() : "");
 
