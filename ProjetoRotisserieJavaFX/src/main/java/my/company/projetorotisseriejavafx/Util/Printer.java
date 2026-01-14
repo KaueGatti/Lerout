@@ -27,44 +27,64 @@ public class Printer {
         StringBuilder marmitasSB = new StringBuilder();
 
         for (int i = 0; i < marmitas.size(); i++) {
+
             marmitasSB.append("[bold]");
             marmitasSB.append(marmitas.get(i).getNome()).append("\n");
             marmitasSB.append("[/bold]");
-            marmitasSB.append(marmitas.get(i).getDetalhes()).append("\n");
-            marmitasSB.append("Observacao: ");
-            marmitasSB.append(marmitas.get(i).getObservacao() != null ? marmitas.get(i).getObservacao() : "");
+
+            marmitasSB.append(marmitas.get(i).getDetalhes());
+
+            if (marmitas.get(i).getObservacao() != null) {
+                if (!marmitas.get(i).getObservacao().isEmpty()) {
+                    marmitasSB.append(marmitas.get(i).getObservacao() != null ? "Observacao: " + marmitas.get(i).getObservacao() : "");
+                }
+            }
 
             if (i != marmitas.size() - 1) {
                 marmitasSB.append("\n\n");
             }
         }
 
+        marmitasSB.append("\n");
+
         String marmitasText = marmitasSB.toString();
         marmitasText = marmitasText.replace("Principais:", "[bold]Principais:[/bold]")
                 .replace("Misturas:", "[bold]\nMisturas:[/bold]")
                 .replace("Guarnicoes:", "[bold]\nGuarnicoes:[/bold]")
                 .replace("Saladas:", "[bold]\nSaladas:[/bold]")
-                .replace("Observacoes:", "[bold]\nObservacoes:[/bold]");
+                .replace("Observacao:", "[bold]\nObservacao:[/bold]");
 
         StringBuilder produtosText = new StringBuilder();
 
-        for (int i = 0; i < produtos.size(); i++) {
-            produtosText.append(produtos.get(i).getNome()).append(" ");
-            produtosText.append("x").append(produtos.get(i).getQuantidade()).append("\n");
+        for (ProdutoVendido produto : produtos) {
+            produtosText.append(produto.getNome()).append(" ");
+            produtosText.append("x").append(produto.getQuantidade()).append("\n");
         }
 
-        dadosPedidos.put("MARMITAS", marmitas.isEmpty() ? "" : "MARMITAS");
-        dadosPedidos.put("marmitas", marmitasText);
-        dadosPedidos.put("PRODUTOS", produtos.isEmpty() ? "" : "PRODUTOS");
-        dadosPedidos.put("produtos", produtosText.toString());
-        dadosPedidos.put("endereco", pedido.getEndereco() != null ? pedido.getEndereco() : "");
+        dadosPedidos.put("MARMITAS", marmitas.isEmpty() ? "" : "MARMITAS\n\n" + marmitasText);
+        dadosPedidos.put("PRODUTOS", produtos.isEmpty() ? "" : "PRODUTOS\n\n" + produtosText);
 
-        dadosPedidos.put("bairro", pedido.getBairro() != null ? pedido.getBairro().getNome() : "");
+        if (pedido.getTipoPedido().equals("Entrega")) {
+            dadosPedidos.put("Endereco:", "Endereco: " + pedido.getEndereco());
+            dadosPedidos.put("Bairro:", "Bairro: " + pedido.getBairro().getNome());
+            dadosPedidos.put("entrega", pedido.getFormattedValorEntrega());
+        } else {
+            dadosPedidos.put("Endereco:", "${rl}");
+            dadosPedidos.put("Bairro:", "[wide]Balcão/Retirada[/wide]");
+            dadosPedidos.put("entrega", "${rl}");
+        }
+
         dadosPedidos.put("pagamento", pedido.getTipoPagamento());
         dadosPedidos.put("total", pedido.getFormattedValorTotal());
-        dadosPedidos.put("observacao", pedido.getObservacoes() != null ? pedido.getObservacoes() : "");
-        dadosPedidos.put("entrega", pedido.getFormattedValorEntrega() != null ? pedido.getFormattedValorEntrega() : "R$ 0,00");
+
+        if (pedido.getObservacoes() != null && !pedido.getObservacoes().isEmpty()) {
+            dadosPedidos.put("PedidoObservacao", "[wide][bold]Observacoes: " + pedido.getObservacoes() + "[/bold][/wide]");
+        } else {
+            dadosPedidos.put("PedidoObservacao", "${rl}");
+        }
+
         try {
+
             String model_order = new String(Files.readAllBytes(Paths.get("src/main/resources/modelo_pedido.txt")));
 
             for (Map.Entry<String, String> entry : dadosPedidos.entrySet()) {
@@ -73,7 +93,17 @@ public class Printer {
                 model_order = model_order.replace(variavel, valor);
             }
 
-            model_order = normalizar(model_order);
+            if (marmitas.isEmpty()) {
+                model_order = model_order.replaceAll("(?m)^.*MARMITAS.*\\R?", "");
+            }
+
+            if (produtos.isEmpty()) {
+                model_order = model_order.replaceAll("(?m)^.*PRODUTOS.*\\R?", "");
+            }
+
+            model_order = model_order.replaceAll("(?m)^.*\\$\\{rl}.*\\R?", "");
+
+            model_order = Normalize.normalize(model_order);
 
             byte[] bytes = PosFormatter.process(model_order);
 
@@ -92,23 +122,23 @@ public class Printer {
 
     private static String normalizar(String texto) {
         return texto
-                .replace("á", "a")
-                .replace("à", "a")
-                .replace("ã", "a")
-                .replace("â", "a")
-                .replace("Á", "A")
-                .replace("é", "e")
-                .replace("ê", "e")
-                .replace("É", "E")
-                .replace("í", "i")
-                .replace("Í", "I")
-                .replace("ó", "o")
-                .replace("ô", "o")
-                .replace("õ", "o")
-                .replace("Ó", "O")
-                .replace("ú", "u")
-                .replace("Ú", "U")
-                .replace("ç", "c")
-                .replace("Ç", "C");
+                .replaceAll("á", "a")
+                .replaceAll("à", "a")
+                .replaceAll("ã", "a")
+                .replaceAll("â", "a")
+                .replaceAll("Á", "A")
+                .replaceAll("é", "e")
+                .replaceAll("ê", "e")
+                .replaceAll("É", "E")
+                .replaceAll("í", "i")
+                .replaceAll("Í", "I")
+                .replaceAll("ó", "o")
+                .replaceAll("ô", "o")
+                .replaceAll("õ", "o")
+                .replaceAll("Ó", "O")
+                .replaceAll("ú", "u")
+                .replaceAll("Ú", "U")
+                .replaceAll("ç", "c")
+                .replaceAll("Ç", "C");
     }
 }

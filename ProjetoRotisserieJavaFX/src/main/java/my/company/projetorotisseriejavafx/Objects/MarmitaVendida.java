@@ -93,9 +93,10 @@ public class MarmitaVendida {
             return detalhes;
         }
 
-        StringBuilder detalhes = new StringBuilder("Principais: ");
+        StringBuilder detalhes = new StringBuilder();
 
-        if (principais != null) {
+        if (principais != null && !principais.isEmpty()) {
+            detalhes.append("Principais: ");
             for (int i = 0; i < principais.size(); i++) {
                 detalhes.append(principais.get(i));
 
@@ -103,11 +104,11 @@ public class MarmitaVendida {
                     detalhes.append(", ");
                 }
             }
+            detalhes.append("\n");
         }
 
-        detalhes.append("\nMisturas: ");
-
-        if (misturas != null) {
+        if (misturas != null && !misturas.isEmpty()) {
+            detalhes.append("Misturas: ");
             for (int i = 0; i < misturas.size(); i++) {
                 detalhes.append(misturas.get(i));
 
@@ -115,11 +116,11 @@ public class MarmitaVendida {
                     detalhes.append(", ");
                 }
             }
+            detalhes.append("\n");
         }
 
-        detalhes.append("\nGuarnicoes: ");
-
-        if (guarnicoes != null) {
+        if (guarnicoes != null && !guarnicoes.isEmpty()) {
+            detalhes.append("Guarnicoes: ");
             for (int i = 0; i < guarnicoes.size(); i++) {
                 detalhes.append(guarnicoes.get(i));
 
@@ -127,11 +128,12 @@ public class MarmitaVendida {
                     detalhes.append(", ");
                 }
             }
+            detalhes.append("\n");
+
         }
 
-        detalhes.append("\nSaladas: ");
-
-        if (saladas != null) {
+        if (saladas != null && !saladas.isEmpty()) {
+            detalhes.append("Saladas: ");
             for (int i = 0; i < saladas.size(); i++) {
                 detalhes.append(saladas.get(i));
 
@@ -139,6 +141,7 @@ public class MarmitaVendida {
                     detalhes.append(", ");
                 }
             }
+            detalhes.append("\n");
         }
 
         this.detalhes = detalhes.toString();

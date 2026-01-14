@@ -6,24 +6,19 @@
 Data: ${data}
 ------------------------------------------------
 [wide][bold]${MARMITAS}[/bold]
-${marmitas}
-
-[bold]${PRODUTOS}
-${produtos}
-[/bold]
+[bold]${PRODUTOS}[/bold][/wide]
 ------------------------------------------------
-[bold]Endereco[/bold]: ${endereco}
-[bold]Bairro[/bold]: ${bairro}
+[wide][bold]${Endereco:}[/bold]
+[bold]${Bairro:}[/bold][/wide]
 ------------------------------------------------
-[bold]Pagamento:[/bold] ${pagamento}
-[bold]Total:[/bold] ${total}
+[wide][bold]Pagamento:[/bold] ${pagamento}
+[bold]Total:[/bold] ${total}[/wide]
 ------------------------------------------------
-Observacao: ${observacao}
+${PedidoObservacao}
 [/center]
 [right]
-[bold]TX:[/bold] ${entrega}
-[/right]
-[/wide]
+[wide][bold]TX:[/bold] ${entrega}
+[/right][/wide]
 [feed]
 
 
