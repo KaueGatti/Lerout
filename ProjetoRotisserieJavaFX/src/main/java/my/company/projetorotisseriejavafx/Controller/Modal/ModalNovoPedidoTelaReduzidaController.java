@@ -129,6 +129,7 @@ public class ModalNovoPedidoTelaReduzidaController extends NovoPedidoController 
 
             PaneMarmitaController marmitaController = loader.getController();
             marmitaController.setController(this);
+            APMarmitaProduto.getChildren().clear();
             APMarmitaProduto.getChildren().add(marmitaPane);
         } catch (IOException e) {
             System.out.println("Erro ao carregar PaneMarmita: " + e);

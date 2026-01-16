@@ -1,5 +1,6 @@
 package my.company.projetorotisseriejavafx.Objects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MarmitaVendida {
@@ -93,58 +94,55 @@ public class MarmitaVendida {
             return detalhes;
         }
 
-        StringBuilder detalhes = new StringBuilder();
+        StringBuilder detalhesSB = new StringBuilder();
 
-        if (principais != null && !principais.isEmpty()) {
-            detalhes.append("Principais: ");
-            for (int i = 0; i < principais.size(); i++) {
-                detalhes.append(principais.get(i));
+        List<String> detalhesList = new ArrayList<>(principais);
 
-                if (i != principais.size() - 1) {
-                    detalhes.append(", ");
-                }
+        for (int i = 0; i < detalhesList.size(); i++) {
+            detalhesSB.append(detalhesList.get(i));
+
+            if (i != detalhesList.size() - 1) {
+                detalhesSB.append(", ");
             }
-            detalhes.append("\n");
         }
 
-        if (misturas != null && !misturas.isEmpty()) {
-            detalhes.append("Misturas: ");
-            for (int i = 0; i < misturas.size(); i++) {
-                detalhes.append(misturas.get(i));
+        detalhesSB.append("\n\n");
+        detalhesList = misturas;
 
-                if (i != misturas.size() - 1) {
-                    detalhes.append(", ");
-                }
+
+        for (int i = 0; i < detalhesList.size(); i++) {
+            detalhesSB.append(detalhesList.get(i));
+
+            if (i != detalhesList.size() - 1) {
+                detalhesSB.append(", ");
             }
-            detalhes.append("\n");
         }
 
-        if (guarnicoes != null && !guarnicoes.isEmpty()) {
-            detalhes.append("Guarnicoes: ");
-            for (int i = 0; i < guarnicoes.size(); i++) {
-                detalhes.append(guarnicoes.get(i));
+        detalhesSB.append("\n\n");
+        detalhesList = guarnicoes;
 
-                if (i != guarnicoes.size() - 1) {
-                    detalhes.append(", ");
-                }
+        for (int i = 0; i < detalhesList.size(); i++) {
+            detalhesSB.append(detalhesList.get(i));
+
+            if (i != detalhesList.size() - 1) {
+                detalhesSB.append(", ");
             }
-            detalhes.append("\n");
-
         }
 
-        if (saladas != null && !saladas.isEmpty()) {
-            detalhes.append("Saladas: ");
-            for (int i = 0; i < saladas.size(); i++) {
-                detalhes.append(saladas.get(i));
+        detalhesSB.append("\n\n");
+        detalhesList = saladas;
 
-                if (i != saladas.size() - 1) {
-                    detalhes.append(", ");
-                }
+        for (int i = 0; i < detalhesList.size(); i++) {
+            detalhesSB.append(detalhesList.get(i));
+
+            if (i != detalhesList.size() - 1) {
+                detalhesSB.append(", ");
             }
-            detalhes.append("\n");
         }
 
-        this.detalhes = detalhes.toString();
+        detalhesSB.append("\n");
+
+        this.detalhes = detalhesSB.toString();
 
         return this.detalhes;
     }

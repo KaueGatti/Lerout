@@ -48,11 +48,6 @@ public class Printer {
         marmitasSB.append("\n");
 
         String marmitasText = marmitasSB.toString();
-        marmitasText = marmitasText.replace("Principais:", "[bold]Principais:[/bold]")
-                .replace("Misturas:", "[bold]\nMisturas:[/bold]")
-                .replace("Guarnicoes:", "[bold]\nGuarnicoes:[/bold]")
-                .replace("Saladas:", "[bold]\nSaladas:[/bold]")
-                .replace("Observacao:", "[bold]\nObservacao:[/bold]");
 
         StringBuilder produtosText = new StringBuilder();
 

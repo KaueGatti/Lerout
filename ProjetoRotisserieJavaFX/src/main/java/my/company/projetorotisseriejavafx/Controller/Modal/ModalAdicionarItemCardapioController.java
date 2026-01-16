@@ -34,6 +34,7 @@ public class ModalAdicionarItemCardapioController {
         this.categoria = categoria;
         this.lista = lista;
         loadLTitulo();
+        TFNome.requestFocus();
     }
 
     @FXML

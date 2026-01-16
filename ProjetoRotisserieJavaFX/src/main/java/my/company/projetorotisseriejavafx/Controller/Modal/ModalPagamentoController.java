@@ -235,10 +235,12 @@ public class ModalPagamentoController {
     public boolean validaValorPago() {
         double valorPago = pagamentos.stream().mapToDouble(Pagamento::getValor).sum();
 
-        if (valorPago < valorPedido) {
-            String valorRestante = String.format("R$ %.2f", valorPedido - valorPago);
-            LInfo.setText("Valor insuficiente! restam " + valorRestante);
-            return false;
+        if (!CBPagamento.getValue().equals("Pagar depois") && !CBPagamento.getValue().equals("A definir")) {
+            if (valorPago < valorPedido) {
+                String valorRestante = String.format("R$ %.2f", valorPedido - valorPago);
+                LInfo.setText("Valor insuficiente! restam " + valorRestante);
+                return false;
+            }
         }
 
         LInfo.setText("");
