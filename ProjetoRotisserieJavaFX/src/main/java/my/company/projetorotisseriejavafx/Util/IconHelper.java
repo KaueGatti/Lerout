@@ -59,6 +59,11 @@ public class IconHelper {
                     iconScale.getStyleClass().add("icon-scale");
                     btn.setGraphic(iconScale);
                     break;
+                case "icon-minimize":
+                    FontIcon iconMinimize = new FontIcon("bi-arrows-angle-contract");
+                    iconMinimize.getStyleClass().add("icon-minimize");
+                    btn.setGraphic(iconMinimize);
+                    break;
             }
         }
     }
@@ -95,6 +100,11 @@ public class IconHelper {
                     FontIcon iconScale = new FontIcon("mdi-scale");
                     iconScale.getStyleClass().add("icon-scale");
                     label.setGraphic(iconScale);
+                    break;
+                case "icon-minimize":
+                    FontIcon iconMinimize = new FontIcon("bi-arrows-angle-contract");
+                    iconMinimize.getStyleClass().add("icon-minimize");
+                    label.setGraphic(iconMinimize);
                     break;
             }
         }

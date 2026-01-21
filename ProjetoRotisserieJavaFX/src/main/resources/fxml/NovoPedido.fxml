@@ -183,7 +183,7 @@
       <Button fx:id="btnMinimizar" layoutX="1472.0" layoutY="17.0" mnemonicParsing="false" onAction="#minimizar" prefHeight="30.0" prefWidth="30.0">
          <styleClass>
             <String fx:value="button-action" />
-            <String fx:value="icon-search" />
+            <String fx:value="icon-minimize" />
          </styleClass>
       </Button>
    </children>

@@ -6,10 +6,12 @@ import my.company.projetorotisseriejavafx.Objects.ProdutoVendido;
 
 import javax.print.*;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -80,7 +82,14 @@ public class Printer {
 
         try {
 
-            String model_order = new String(Files.readAllBytes(Paths.get("src/main/resources/modelo_pedido.txt")));
+            InputStream is = Printer.class.getResourceAsStream("/modelo_pedido.txt");
+            if (is == null) {
+                throw new IOException("Template modelo_pedido.txt não encontrado no JAR");
+            }
+            byte[] templateBytes = is.readAllBytes();
+            is.close();
+
+            String model_order = new String(templateBytes, StandardCharsets.UTF_8);
 
             for (Map.Entry<String, String> entry : dadosPedidos.entrySet()) {
                 String variavel = "${" + entry.getKey() + "}";

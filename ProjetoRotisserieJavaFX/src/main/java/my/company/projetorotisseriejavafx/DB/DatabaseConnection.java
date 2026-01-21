@@ -32,7 +32,7 @@ public class DatabaseConnection {
     }
 
     private static String getDatabasePath() {
-        String appName = "ProjetoRotisserieJavaFX";
+        String appName = "Lerout";
 
         String appData = System.getenv("APPDATA");
 
@@ -265,7 +265,7 @@ public class DatabaseConnection {
                         BEGIN
                             UPDATE Pedido
                             SET valor_pago = valor_pago + NEW.valor
-                            WHERE id = NEW.id_pedido;
+                            WHERE id = NEW.id_pedido AND Pedido.status != 'PAGO';
                         END
                     """);
 
