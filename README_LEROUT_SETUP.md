@@ -13,6 +13,8 @@ Este guia apresenta o processo completo de instalação do sistema Lerout.
 
 Faça o download do arquivo **Lerout Setup.zip** e descompacte-o em um local temporário de sua preferência.
 
+Link para download: https://www.mediafire.com/file/olifhespk77kdh5/Lerout+Setup.zip/file
+
 ### 2. Configuração do Java
 
 Após descompactar, você encontrará as pastas `jdk-24` e `javafx-sdk-25.0.1`. Siga os passos:
