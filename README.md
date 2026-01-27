@@ -1,4 +1,4 @@
-# Projeto Rotisserie
+# Lerout
 
 > Sistema PDV/ERP para rotisserias
 
