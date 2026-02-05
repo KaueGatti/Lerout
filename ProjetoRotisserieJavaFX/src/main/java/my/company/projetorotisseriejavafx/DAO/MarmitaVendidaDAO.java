@@ -11,8 +11,10 @@ import my.company.projetorotisseriejavafx.Objects.MarmitaVendida;
 public class MarmitaVendidaDAO {
 
     static public int criar(ObservableList<MarmitaVendida> mvs, int idPedido) throws SQLException {
-        String sql = "INSERT INTO Marmita_Vendida (id_pedido, id_marmita, subtotal, detalhes, observacao) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String sql = """
+                        INSERT INTO Marmita_Vendida (id_pedido, id_marmita, quantidade, subtotal, detalhes, observacao)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                     """;
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -21,9 +23,10 @@ public class MarmitaVendidaDAO {
 
                 stmt.setInt(1, idPedido);
                 stmt.setInt(2, mv.getIdMarmita());
-                stmt.setDouble(3, mv.getSubtotal());
-                stmt.setString(4, mv.getDetalhes());
-                stmt.setString(5, mv.getObservacao());
+                stmt.setInt(3, mv.getIdMarmita());
+                stmt.setDouble(4, mv.getSubtotal());
+                stmt.setString(5, mv.getDetalhes());
+                stmt.setString(6, mv.getObservacao());
 
                 stmt.addBatch();
             }
@@ -65,6 +68,7 @@ public class MarmitaVendidaDAO {
                     mv.setId(rs.getInt("id"));
                     mv.setIdMarmita(rs.getInt("id_marmita"));
                     mv.setNome(rs.getString("nome_marmita"));
+                    mv.setQuantidade(rs.getInt("quantidade"));
                     mv.setDetalhes(rs.getString("detalhes"));
                     mv.setSubtotal(rs.getDouble("subtotal"));
                     mv.setObservacao(rs.getString("observacao"));
@@ -94,6 +98,7 @@ public class MarmitaVendidaDAO {
                     mv.setId(rs.getInt("id"));
                     mv.setIdMarmita(rs.getInt("id_marmita"));
                     mv.setNome(rs.getString("nome_marmita"));
+                    mv.setQuantidade(rs.getInt("quantidade"));
                     mv.setDetalhes(rs.getString("detalhes"));
                     mv.setSubtotal(rs.getDouble("subtotal"));
                     mv.setObservacao(rs.getString("observacao"));

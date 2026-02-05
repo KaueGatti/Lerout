@@ -16,11 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
+import javafx.scene.control.*;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
@@ -58,6 +54,8 @@ public class PaneMarmitaController implements Initializable {
 
     @FXML
     private ComboBox<Marmita> comboBoxMarmita;
+    @FXML
+    private Spinner<Integer> SQtd;
     @FXML
     private Pane paneMarmita;
     @FXML
@@ -122,6 +120,7 @@ public class PaneMarmitaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadMarmitas();
         loadCardapio();
+        initSpinner();
     }
 
     @FXML
@@ -230,6 +229,8 @@ public class PaneMarmitaController implements Initializable {
 
         double valorAdicionais = 2 * (misturasAdicionais + guarnicoesAdicionais);
 
+        marmita.setQuantidade(SQtd.getValue());
+
         marmita.setSubtotal(valorAdicionais + comboBoxMarmita.getValue().getValor());
 
         if (descontoAdicional != null) {
@@ -239,6 +240,8 @@ public class PaneMarmitaController implements Initializable {
                 marmita.setSubtotal(marmita.getSubtotal() + descontoAdicional.getValor());
             }
         }
+
+        marmita.setSubtotal(marmita.getSubtotal() * marmita.getQuantidade());
 
         controller.adicionarMarmita(marmita);
 
@@ -518,5 +521,10 @@ public class PaneMarmitaController implements Initializable {
         } catch (IOException e) {
             System.out.println("Erro ao abrir modal desconto/adicional marmita" + e);
         }
+    }
+
+    private void initSpinner() {
+        SpinnerValueFactory<Integer> svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
+        SQtd.setValueFactory(svf);
     }
 }

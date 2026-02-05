@@ -74,6 +74,8 @@ public class NovoPedidoController {
     @FXML
     private TableColumn<MarmitaVendida, String> colNomeMarmita;
     @FXML
+    private TableColumn<MarmitaVendida, Integer> colQuantidadeMarmita;
+    @FXML
     private TableColumn<MarmitaVendida, Double> colSubtotalMarmita;
     @FXML
     private TableColumn<MarmitaVendida, Void> colDelMarmita;
@@ -610,6 +612,7 @@ public class NovoPedidoController {
 
     private void initTableMarmita() {
         colNomeMarmita.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colQuantidadeMarmita.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colSubtotalMarmita.setCellValueFactory(new PropertyValueFactory<>("formattedSubtotal"));
         colDelMarmita.setCellFactory(param -> new TableCell<>() {
 
