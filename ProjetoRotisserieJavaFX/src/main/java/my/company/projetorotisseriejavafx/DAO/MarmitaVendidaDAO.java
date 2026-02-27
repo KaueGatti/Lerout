@@ -23,7 +23,7 @@ public class MarmitaVendidaDAO {
 
                 stmt.setInt(1, idPedido);
                 stmt.setInt(2, mv.getIdMarmita());
-                stmt.setInt(3, mv.getIdMarmita());
+                stmt.setInt(3, mv.getQuantidade());
                 stmt.setDouble(4, mv.getSubtotal());
                 stmt.setString(5, mv.getDetalhes());
                 stmt.setString(6, mv.getObservacao());

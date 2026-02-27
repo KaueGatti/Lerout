@@ -31,6 +31,7 @@ public class Printer {
         for (int i = 0; i < marmitas.size(); i++) {
 
             marmitasSB.append("[bold]");
+            marmitasSB.append(marmitas.get(i).getQuantidade()).append(" - ");
             marmitasSB.append(marmitas.get(i).getNome()).append("\n");
             marmitasSB.append("[/bold]");
 
@@ -72,6 +73,12 @@ public class Printer {
         }
 
         dadosPedidos.put("pagamento", pedido.getTipoPagamento());
+
+        if (pedido.getTipoPagamento().contains("Dinheiro") && pedido.getValorPago() > pedido.getValorTotal()) {
+            double valorTroco = pedido.getValorTotal() - pedido.getValorPago();
+            dadosPedidos.put("troco", String.valueOf(valorTroco));
+        }
+
         dadosPedidos.put("total", pedido.getFormattedValorTotal());
 
         if (pedido.getObservacoes() != null && !pedido.getObservacoes().isEmpty()) {

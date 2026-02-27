@@ -40,7 +40,7 @@ public class ModalPagamentoController {
 
     private boolean finalizado = false;
 
-    private ObservableList<Pagamento> pagamentos = FXCollections.observableArrayList();
+    private ObservableList<Pagamento> pagamentos;
 
     @FXML
     private AnchorPane root;
@@ -69,8 +69,9 @@ public class ModalPagamentoController {
     @FXML
     private TableView<Pagamento> pagamentoTable;
 
-    public void initialize(Double valorPedido) {
+    public void initialize(Double valorPedido, ObservableList<Pagamento> pagamentos) {
         this.valorPedido = valorPedido;
+        this.pagamentos = pagamentos;
         initCampos();
         loadCBPagamento();
         initLValorAPagar();

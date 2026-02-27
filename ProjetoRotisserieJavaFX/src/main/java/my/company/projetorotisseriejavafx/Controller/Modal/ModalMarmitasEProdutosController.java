@@ -26,6 +26,8 @@ public class ModalMarmitasEProdutosController {
     @FXML
     private TableColumn<MarmitaVendida, String> colNomeMarmita;
     @FXML
+    private TableColumn<MarmitaVendida, Integer> colQuantidadeMarmita;
+    @FXML
     private TableColumn<MarmitaVendida, Double> colSubtotalMarmita;
     @FXML
     private TableView<ProdutoVendido> tableProduto;
@@ -56,6 +58,7 @@ public class ModalMarmitasEProdutosController {
 
     private void initTableMarmita() {
         colNomeMarmita.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colQuantidadeMarmita.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
         colSubtotalMarmita.setCellValueFactory(new PropertyValueFactory<>("formattedSubtotal"));
 
         tableMarmita.setOnMouseClicked(event -> {

@@ -17,8 +17,11 @@ Data: ${data}
 ${PedidoObservacao}
 [/center]
 [right]
-[wide][bold]TX:[/bold] ${entrega}
-[/right][/wide]
+[wide]
+[bold]Troco: ${troco}[/bold]
+[bold]TX:[/bold] ${entrega}
+[/right]
+[/wide]
 [feed]
 
 

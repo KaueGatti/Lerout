@@ -46,7 +46,7 @@ public class NovoPedidoController {
     private ObservableList<DescontoAdicional> descontosEAdicionais = FXCollections.observableArrayList();
 
     private String pagamento;
-    private List<Pagamento> pagamentos = new ArrayList<>();
+    private ObservableList<Pagamento> pagamentos = FXCollections.observableArrayList();
     private LocalDate vencimento;
     private boolean print;
 
@@ -399,6 +399,10 @@ public class NovoPedidoController {
 
             if (!abrirModalPagamento(valorTotal)) return;
 
+            // Soma todos os pagamentos e define o valor pago
+            double valorPago = pagamentos.stream().mapToDouble(Pagamento::getValor).sum();
+            pedido.setValorPago(valorPago);
+
             pedido.setTipoPagamento(pagamento);
             pedido.setVencimento(vencimento);
 
@@ -481,7 +485,7 @@ public class NovoPedidoController {
 
             ModalPagamentoController controller = loader.getController();
 
-            controller.initialize(valorTotal);
+            controller.initialize(valorTotal, pagamentos);
 
             modal.setResizable(false);
             modal.initModality(Modality.APPLICATION_MODAL);
@@ -493,7 +497,6 @@ public class NovoPedidoController {
             }
 
             pagamento = controller.getPagamento();
-            pagamentos =  controller.getPagamentos();
             vencimento = controller.getVencimento();
             print = controller.getPrint();
 

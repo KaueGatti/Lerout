@@ -1,41 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" prefHeight="562.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="my.company.projetorotisseriejavafx.Controller.Modal.ModalMarmitasEProdutosController">
+<AnchorPane fx:id="root" prefHeight="562.0" prefWidth="569.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="my.company.projetorotisseriejavafx.Controller.Modal.ModalMarmitasEProdutosController">
     <children>
         <TableView fx:id="tableMarmita" layoutX="50.0" layoutY="49.0" prefHeight="219.0" prefWidth="515.0">
             <columns>
-                <TableColumn fx:id="colNomeMarmita" prefWidth="345.6000003814697" text="Nome"/>
-                <TableColumn fx:id="colSubtotalMarmita" minWidth="0.0" prefWidth="167.20004272460938" text="Subtotal"/>
+                <TableColumn fx:id="colNomeMarmita" prefWidth="264.0" text="Nome" />
+            <TableColumn fx:id="colQuantidadeMarmita" prefWidth="122.4000244140625" text="Quantidade" />
+                <TableColumn fx:id="colSubtotalMarmita" minWidth="0.0" prefWidth="130.39996337890625" text="Subtotal" />
             </columns>
         </TableView>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="7.0" prefHeight="35.0"
-               prefWidth="616.0" styleClass="titleTable" text="Marmitas"
-               textAlignment="CENTER">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="7.0" prefHeight="35.0" prefWidth="616.0" styleClass="titleTable" text="Marmitas" textAlignment="CENTER">
             <font>
-                <Font name="Segoe UI Bold" size="24.0"/>
+                <Font name="Segoe UI Bold" size="24.0" />
             </font>
         </Label>
         <TableView fx:id="tableProduto" layoutX="50.0" layoutY="317.0" prefHeight="219.0" prefWidth="516.0">
             <columns>
-                <TableColumn fx:id="colNomeProduto" prefWidth="263.2000370025635" text="Nome"/>
-                <TableColumn fx:id="colQuantidadeProduto" minWidth="0.0" prefWidth="124.0" text="Quantidade"/>
-                <TableColumn fx:id="colSubtotalProduto" minWidth="7.20001220703125" prefWidth="128.800048828125"
-                             text="Subtotal"/>
+                <TableColumn fx:id="colNomeProduto" prefWidth="263.2000370025635" text="Nome" />
+                <TableColumn fx:id="colQuantidadeProduto" minWidth="0.0" prefWidth="124.0" text="Quantidade" />
+                <TableColumn fx:id="colSubtotalProduto" minWidth="7.20001220703125" prefWidth="128.800048828125" text="Subtotal" />
             </columns>
         </TableView>
-        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="275.0" prefHeight="35.0"
-               prefWidth="618.0" styleClass="titleTable" text="Produtos"
-               textAlignment="CENTER">
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="275.0" prefHeight="35.0" prefWidth="618.0" styleClass="titleTable" text="Produtos" textAlignment="CENTER">
             <font>
-                <Font name="Segoe UI Bold" size="24.0"/>
+                <Font name="Segoe UI Bold" size="24.0" />
             </font>
         </Label>
     </children>
