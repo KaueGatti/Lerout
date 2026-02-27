@@ -14,7 +14,16 @@ public class MarmitaVendida {
     private List<String> guarnicoes;
     private List<String> saladas;
     private String observacao;
+    private int quantidade;
     private double subtotal;
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public int getIdMarmita() {
         return idMarmita;
@@ -23,7 +32,6 @@ public class MarmitaVendida {
     public void setIdMarmita(int idMarmita) {
         this.idMarmita = idMarmita;
     }
-
 
     public void setDetalhes(String detalhes) {
         this.detalhes = detalhes;

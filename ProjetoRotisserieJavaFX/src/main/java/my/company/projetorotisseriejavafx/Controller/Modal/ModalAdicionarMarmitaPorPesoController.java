@@ -50,6 +50,7 @@ public class ModalAdicionarMarmitaPorPesoController implements Initializable {
 
         marmitaVendida.setIdMarmita(1);
         marmitaVendida.setNome("Peso");
+        marmitaVendida.setQuantidade(1);
         marmitaVendida.setSubtotal(CurrencyFieldUtil.getValue(TFValor));
         marmitaVendida.setObservacao(TAObservacao.getText());
 

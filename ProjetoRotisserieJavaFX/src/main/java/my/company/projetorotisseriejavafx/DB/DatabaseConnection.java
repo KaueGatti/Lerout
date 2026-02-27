@@ -152,6 +152,7 @@ public class DatabaseConnection {
                             id_pedido INTEGER NOT NULL,
                             id_marmita INTEGER NOT NULL,
                             detalhes TEXT NOT NULL,
+                            quantidade INTEGER NOT NULL,
                             valor_peso REAL,
                             subtotal REAL NOT NULL,
                             observacao TEXT,

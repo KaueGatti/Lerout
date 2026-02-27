@@ -27,7 +27,6 @@ public class PedidoDAO {
             pedido.setValorPago(0);
         } else {
             pedido.setStatus("PAGO");
-            pedido.setValorPago(pedido.getValorTotal());
         }
 
         try (Connection conn = DatabaseConnection.getConnection();
