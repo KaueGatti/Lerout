@@ -75,7 +75,7 @@ public class Printer {
         dadosPedidos.put("pagamento", pedido.getTipoPagamento());
 
         if (pedido.getTipoPagamento().contains("Dinheiro") && pedido.getValorPago() > pedido.getValorTotal()) {
-            double valorTroco = pedido.getValorTotal() - pedido.getValorPago();
+            double valorTroco = pedido.getValorPago() - pedido.getValorTotal();
             dadosPedidos.put("troco", String.valueOf(valorTroco));
         }
 
