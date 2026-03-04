@@ -356,9 +356,9 @@
             </Label>
             <TableView fx:id="TMarmitas" layoutX="17.0" layoutY="14.0" prefHeight="270.0" prefWidth="348.0">
               <columns>
-                <TableColumn prefWidth="137.5999755859375" text="Nome" />
-                <TableColumn prefWidth="73.60009765625" text="Qntd." />
-                  <TableColumn prefWidth="137.599853515625" text="Subtotal" />
+                <TableColumn fx:id="colNomeMV" prefWidth="137.5999755859375" text="Nome" />
+                <TableColumn fx:id="colQuantidadeMV" prefWidth="73.60009765625" text="Qntd." />
+                  <TableColumn fx:id="colSubtotalMV" prefWidth="137.599853515625" text="Subtotal" />
               </columns>
             </TableView>
          </children>

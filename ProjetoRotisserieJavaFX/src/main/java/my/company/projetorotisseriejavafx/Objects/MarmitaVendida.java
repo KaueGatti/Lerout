@@ -102,6 +102,10 @@ public class MarmitaVendida {
             return detalhes;
         }
 
+        if (idMarmita <= 1) {
+            return "";
+        }
+
         StringBuilder detalhesSB = new StringBuilder();
 
         List<String> detalhesList = new ArrayList<>(principais);

@@ -1,12 +1,14 @@
 package my.company.projetorotisseriejavafx.DAO;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.collections.ObservableList;
 import my.company.projetorotisseriejavafx.DB.DatabaseConnection;
 import my.company.projetorotisseriejavafx.Objects.MarmitaVendida;
+import my.company.projetorotisseriejavafx.Objects.MarmitasVendidas;
 
 public class MarmitaVendidaDAO {
 
@@ -106,6 +108,45 @@ public class MarmitaVendidaDAO {
                 }
             }
         }
+        return lista;
+    }
+
+    static public List<MarmitasVendidas> listarMarmitasVendidas(LocalDate data) throws SQLException {
+        String sql = """
+                SELECT
+                    M.nome,
+                    SUM(MV.quantidade) AS qtd,
+                    SUM(MV.subtotal) AS subtotal
+                FROM Marmita_Vendida AS MV
+                JOIN Marmita AS M ON M.id = MV.id_marmita
+                JOIN Pedido AS P ON P.id = MV.id_pedido
+                WHERE
+                    strftime('%Y-%m-%d', P.date_time) = ?
+                GROUP BY
+                    M.nome
+                """;
+
+        List<MarmitasVendidas> lista = new ArrayList<>();
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+
+            stmt.setString(1, data.toString());
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                System.out.println(rs.getFetchSize());
+                while (rs.next()) {
+                    String nome = rs.getString("nome");
+                    Integer qtd = rs.getInt("qtd");
+                    double subtotal = rs.getDouble("subtotal");
+                    MarmitasVendidas mv = new MarmitasVendidas(nome, qtd, subtotal);
+                    lista.add(mv);
+                }
+            }
+        }
+
+        System.out.println(lista.size());
         return lista;
     }
 }

@@ -10,6 +10,7 @@ import my.company.projetorotisseriejavafx.DB.DatabaseConnection;
 import my.company.projetorotisseriejavafx.Util.IconHelper;
 
 import java.io.IOException;
+import java.io.PrintStream;
 
 public class App extends Application {
 
@@ -65,7 +66,7 @@ public class App extends Application {
 
     public static void main(String[] args) {
         DatabaseConnection.initializeDatabase();
-        launch();
+        launch(args);
     }
 
 }

@@ -1,17 +1,28 @@
 package my.company.projetorotisseriejavafx.Controller;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
+import my.company.projetorotisseriejavafx.DAO.MarmitaVendidaDAO;
 import my.company.projetorotisseriejavafx.DAO.PedidoDAO;
+import my.company.projetorotisseriejavafx.Objects.MarmitasVendidas;
 import my.company.projetorotisseriejavafx.Objects.Relatorio;
 import my.company.projetorotisseriejavafx.Util.DatabaseExceptionHandler;
 
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class RelatorioController implements Initializable {
@@ -100,11 +111,24 @@ public class RelatorioController implements Initializable {
     @FXML
     private Pane panePrincipal;
 
+    @FXML
+    private TableView<MarmitasVendidas> TMarmitas;
+
+    @FXML
+    private TableColumn<MarmitasVendidas, String> colNomeMV;
+
+    @FXML
+    private TableColumn<MarmitasVendidas, Integer> colQuantidadeMV;
+
+    @FXML
+    private TableColumn<MarmitasVendidas, Double> colSubtotalMV;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DPData.setValue(LocalDate.now());
         loadRelatorio();
         initDPData();
+        initTableMV();
     }
 
     private void initDPData() {
@@ -112,6 +136,7 @@ public class RelatorioController implements Initializable {
 
         DPData.valueProperty().addListener((observable, oldValue, newValue) -> {
             loadRelatorio();
+            loadTableMV();
         });
     }
 
@@ -153,4 +178,35 @@ public class RelatorioController implements Initializable {
         LTotalPagamentos.setText(String.valueOf(relatorio.getTotalPagamentos()));
         LValorTotalPagamentos.setText(String.format("R$ %.2f", relatorio.getValorTotalPagamentos()));
     }
+
+    private void initTableMV() {
+        colNomeMV.setCellValueFactory(data ->
+                new SimpleStringProperty(data.getValue().nome()));
+
+        colQuantidadeMV.setCellValueFactory(data ->
+                new SimpleObjectProperty<>(data.getValue().quantidade()));
+
+        colSubtotalMV.setCellValueFactory(data ->
+                new SimpleObjectProperty<>(data.getValue().subtotal()));
+
+        try {
+            List<MarmitasVendidas> list = MarmitaVendidaDAO.listarMarmitasVendidas(DPData.getValue());
+            ObservableList<MarmitasVendidas> observableList = FXCollections.observableList(list);
+            TMarmitas.setItems(observableList);
+        } catch (SQLException e) {
+            DatabaseExceptionHandler.handleException(e, "Erro ao gerar relatorio");
+        }
+    }
+
+    private void loadTableMV() {
+        try {
+            List<MarmitasVendidas> list = MarmitaVendidaDAO.listarMarmitasVendidas(DPData.getValue());
+            ObservableList<MarmitasVendidas> observableList = FXCollections.observableList(list);
+            TMarmitas.setItems(observableList);
+        } catch (SQLException e) {
+            DatabaseExceptionHandler.handleException(e, "Erro ao gerar relatorio");
+        }
+    }
+
+
 }

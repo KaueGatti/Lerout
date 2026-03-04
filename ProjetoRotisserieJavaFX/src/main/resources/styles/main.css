@@ -51,7 +51,7 @@
 #PResumoGeral-relatorio,
 #PPedidos-relatorio,
 #PPagamentos-relatorio,
-#LMarmitasVendidas-relatorio{
+#PMarmitasVendidas-relatorio {
     -fx-background-color: rgba(0, 0, 0, 0.1);
     -fx-background-radius: 0 0 10 10;
 }
