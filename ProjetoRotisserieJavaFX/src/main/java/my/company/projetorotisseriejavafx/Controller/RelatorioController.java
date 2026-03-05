@@ -97,6 +97,12 @@ public class RelatorioController implements Initializable {
     private Label LValorTotalPagamentos;
 
     @FXML
+    private Label LTotalMarmitas;
+
+    @FXML
+    private Label LValorTotalMarmitas;
+
+    @FXML
     private Pane PPagamentos;
 
     @FXML
@@ -126,17 +132,17 @@ public class RelatorioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         DPData.setValue(LocalDate.now());
+        initTableMV();
         loadRelatorio();
         initDPData();
-        initTableMV();
     }
 
     private void initDPData() {
         DPData.setEditable(false);
 
         DPData.valueProperty().addListener((observable, oldValue, newValue) -> {
-            loadRelatorio();
             loadTableMV();
+            loadRelatorio();
         });
     }
 
@@ -177,6 +183,13 @@ public class RelatorioController implements Initializable {
 
         LTotalPagamentos.setText(String.valueOf(relatorio.getTotalPagamentos()));
         LValorTotalPagamentos.setText(String.format("R$ %.2f", relatorio.getValorTotalPagamentos()));
+
+        List<MarmitasVendidas> marmitasVenidas = TMarmitas.getItems();
+        int qtdMV = marmitasVenidas.stream().mapToInt(MarmitasVendidas::quantidade).sum();
+        double valorMV = marmitasVenidas.stream().mapToDouble(MarmitasVendidas::subtotal).sum();
+
+        LTotalMarmitas.setText(String.valueOf(qtdMV));
+        LValorTotalMarmitas.setText(String.format("R$ %.2f", valorMV));
     }
 
     private void initTableMV() {
